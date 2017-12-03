@@ -40,6 +40,8 @@ public class MCFrameUtils {
 	{
 		setLookAndFeel();
 		JFrame myFrame = new JFrame();
+		myFrame.setSize(500,500);
+		setPosition(myFrame);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		return myFrame;
 	}

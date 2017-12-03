@@ -1,6 +1,7 @@
 package mcutils.gui.table;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -80,15 +81,16 @@ public class MCTableModel implements TableModel{
 		rows.get(row).set(col, o);
 	}
 	
-	public void addRow(MCTableRow row)
+	public void addRows(MCTableRow[] rows)
 	{
-		addRow(row,rows.size());
+		addRows(rows,this.rows.size());
 	}
 	
-	public void addRow(MCTableRow row, int index)
+	public void addRows(MCTableRow[] rows, int index)
 	{
-		rows.add(index,row);
-		fireTableRowsInserted(index,index);
+		
+		this.rows.addAll(index, Arrays.asList(rows));
+		fireTableRowsInserted(index,index+rows.length-1);
 	}
 
 	public MCTableRow removeRow(int i)

@@ -1,5 +1,6 @@
 package mcutils.gui.table;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -78,12 +79,25 @@ public class MCTable extends JXTable {
 		setDefaultEditor(Enum.class, new MCTableCellEditor(new JComboBox()));
 	}
 	
+	public MCTableModel getTableModel()
+	{
+		return (MCTableModel)getModel();
+	}
+	
 	public void addRow(MCTableRow row)
 	{
-		MCTableModel model = (MCTableModel)getModel();
-		model.addRow(row);
+		addRows(row);
 	}
 
+	public void addRows(Collection<MCTableRow> rows)
+	{
+		addRows(rows.toArray(new MCTableRow[rows.size()]));
+	}
+	
+	public void addRows(MCTableRow... rows)
+	{
+		getTableModel().addRows(rows);
+	}
 	
 	public MCTableRow removeRow(int i)
 	{
