@@ -1,47 +1,43 @@
 package mcutils.gui.table;
 
+import mcutils.gui.style.StyleField;
+import mcutils.gui.style.StyleInterface;
+import mcutils.gui.style.StyleMetaData;
+import java.util.LinkedHashMap;
 import java.awt.Color;
-import java.util.HashMap;
-import java.util.Map;
 
-import mcutils.gui.MCGUIProperties;
-
-public class MCTableStyle extends MCGUIProperties{
-
-	protected enum STYLE_ITEM
-	{
-		ROW_COLOR_A("ROW_COLOR_A",Color.WHITE),
-		ROW_COLOR_B("ROW_COLOR_B",Color.BLUE.brighter().brighter().brighter()),
-		DISABLED_COLOR_A("DISABLED_COLOR_A",Color.LIGHT_GRAY),
-		DISABLED_COLOR_B("DISABLED_COLOR_B",Color.DARK_GRAY)
-		;
-		
-		String name;
-		Object value;
-		
-		STYLE_ITEM(String name, Object value)
-		{
-			this.name = name;
-			this.value = value;
-		}
-		
-		public String getName(){ return name; }
-		public Object getValue(){ return value; }
-		public void setValue(Object value) { this.value = value; } 
-		
-	}
+public class MCTableStyle implements StyleInterface
+{
+	public static StyleField<Color> fd_rowHighlightEven = new StyleField<Color>(MCTableStyle.class, Color.class);
+	public static StyleField<Color> fd_rowHighlightOdd = new StyleField<Color>(MCTableStyle.class, Color.class);
 	
-	public MCTableStyle()
+	private static LinkedHashMap<String,StyleField<?>> fieldMap = new LinkedHashMap<>();
+	
+	static
 	{
-		super(MCTable.class);
+		fd_rowHighlightEven.setName("rowHighlightEven");
+		fd_rowHighlightEven.setDisplayName("Row Highlight Even");
+		fd_rowHighlightEven.setDefaultValue(new Color(166,166,255));
+		fd_rowHighlightEven.setDescription("This is a thing!");
+		addField(fd_rowHighlightEven);
+		fd_rowHighlightOdd.setName("rowHighlightOdd");
+		fd_rowHighlightOdd.setDisplayName("Row Highlight Odd");
+		fd_rowHighlightOdd.setDefaultValue(Color.WHITE);
+		fd_rowHighlightOdd.setDescription("This is a different thing!");
+		addField(fd_rowHighlightOdd);
 	}
-
-	@Override
-	public Map<String, Object> getDefaultProperties() {
-		Map<String, Object> props = new HashMap<>();
-		for (STYLE_ITEM i : STYLE_ITEM.values()) {
-			props.put(i.getName(), i.getValue());
-		}
-		return props;
-	}
+	private StyleMetaData metaData = new StyleMetaData(fieldMap);
+	
+	private Color rowHighlightEven = new Color(166,166,255);
+	private Color rowHighlightOdd = Color.WHITE;
+	
+	public Color getRowHighlightEven(){ return rowHighlightEven; }
+	public Color getRowHighlightOdd(){ return rowHighlightOdd; }
+	
+	public void setRowHighlightEven(Color rowHighlightEven){ this.rowHighlightEven = rowHighlightEven; }
+	public void setRowHighlightOdd(Color rowHighlightOdd){ this.rowHighlightOdd = rowHighlightOdd; }
+	
+	public StyleMetaData getMetaData() { return metaData; }
+	
+	public static void addField(StyleField<?> f) { fieldMap.put(f.getName(),f); }
 }

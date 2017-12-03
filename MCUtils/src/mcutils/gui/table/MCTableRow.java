@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class MCTableRow extends ArrayList<Object> {
 
+	private static final long serialVersionUID = 1L;
 	Object data = null;
 	
 	public MCTableRow()

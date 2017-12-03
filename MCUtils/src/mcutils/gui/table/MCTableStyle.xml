@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class>
+	<package>mcutils.gui.table</package>
+	<field name="rowHighlightEven">
+		<display-name>Row Highlight Even</display-name>
+		<type>Color</type>
+		<default-value>new Color(166,166,255)</default-value>
+		<description>This is a thing!</description>
+	</field>
+	<field name="rowHighlightOdd">
+		<display-name>Row Highlight Odd</display-name>
+		<type>Color</type>
+		<default-value>Color.WHITE</default-value>
+		<description>This is a different thing!</description>
+	</field>
+</class>

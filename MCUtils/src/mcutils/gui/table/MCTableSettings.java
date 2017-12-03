@@ -1,27 +1,23 @@
 package mcutils.gui.table;
 
-import mcutils.gui.MCGUIProperties;
-import mcutils.gui.MCStyle;
+import org.jdesktop.swingx.decorator.Highlighter;
 
 public class MCTableSettings {
 	
-	private MCGUIProperties style;
+	private MCTableStyle style = new MCTableStyle();
 	private boolean renderingBooleansAsCheckboxes = false;
+	private MCTableHighlighter highligher = new MCTableHighlighter(this);
 	
 	public MCTableSettings()
 	{
-		try {
-			setStyle(MCStyle.DEFAULT_STYLES.get(MCTable.class).newInstance());
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
-	public MCGUIProperties getStyle() {
+	public MCTableStyle getStyle() {
 		return style;
 	}
 
-	public void setStyle(MCGUIProperties style) {
+	public void setStyle(MCTableStyle style) {
 		this.style = style;
 	}
 
@@ -31,6 +27,10 @@ public class MCTableSettings {
 
 	public void setRenderingBooleansAsCheckboxes(boolean renderingBooleansAsCheckboxes) {
 		this.renderingBooleansAsCheckboxes = renderingBooleansAsCheckboxes;
+	}
+
+	public Highlighter getHighLighter() {
+		return highligher;
 	}
 	
 }
